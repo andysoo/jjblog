@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>JJ Blog</title>
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+          aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">JJ Blog</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="nav-item">
+            <!-- Button trigger modal -->
+            <a class="nav-link login" href="#" data-toggle="modal" data-target="#login">
+              登陆
+            </a>
+          </li>
+          <li id="fat-menu" class="nav-item dropdown">
+            <a id="drop3" href="#" class="dropdown-toggle nav-link username" data-toggle="dropdown" role="button"
+              aria-haspopup="true" aria-expanded="false" data-target="#logout">
+              动态用户名
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="drop3">
+              <li><a class="nav-link " href="#" data-toggle="modal" data-target="#rename">修改昵称</a></li>
+              <li><a class="nav-link " href="#" data-toggle="modal" data-target="#changepass">修改密码</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link logout" href="#" data-toggle="modal" data-target="#logout">
+              注销
+            </a>
+          </li>
+          <li>
+            <a class="nav-link register" href="#" data-toggle="modal" data-target="#reg">
+              注册
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!--/.nav-collapse -->
+    </div>
+  </nav>
+
+  <main class="container" role="main">
+    <div class="starter-template">
+      <div class="guest">
+        <h2>欢迎光临</h2>
+        <p class="lead">你是游客</p>
+      </div>
+      <div class="user">
+        <h2>我的论坛</h2>
+        <p class="lead">授权用户</p>
+      </div>
+    </div>
+  </main>
+
+  <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">用户登陆</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label for="userlogin" class="col-sm-2 control-label">用户名</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="userlogin" placeholder="请输入用户名">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="passlogin" class="col-sm-2 control-label">密码</label>
+              <div class="col-sm-10">
+                <input type="password" class="form-control" id="passlogin" placeholder="请输入密码">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="code" class="col-sm-2 control-label">验证码</label>
+              <div class="col-sm-10">
+                <div class="form-control" id="captcha"></div>
+                <input type="text" class="form-control" id="code" placeholder="请输入验证码">
+              </div>
+            </div>
+          </form>
+          <p id="resp" class="text-danger"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+          <button type="button" class="btn btn-primary signin">登陆</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="reg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">用户注册</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label for="userreg" class="col-sm-2 control-label">用户名</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="userreg" placeholder="请输入用户名">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="passreg1" class="col-sm-2 control-label">密码</label>
+              <div class="col-sm-10">
+                <input type="password" class="form-control" id="passreg1" placeholder="请输入密码">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="passreg2" class="col-sm-2 control-label">确认密码</label>
+              <div class="col-sm-10">
+                <input type="password" class="form-control" id="passreg2" placeholder="请再次输入密码">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="name" class="col-sm-2 control-label">昵称</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="name" placeholder="请输入昵称">
+              </div>
+            </div>
+            <p id="psmsg" class="text-danger"></p>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+          <button type="button" class="btn btn-primary reg">注册</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="rename" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">修改昵称</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label for="userlogin" class="col-sm-2 control-label">新昵称</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="newname" placeholder="请输入用户名">
+              </div>
+            </div>
+          </form>
+          <p id="resp" class="text-danger resp"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+          <button type="button" class="btn btn-primary rename">确定</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="changepass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">修改密码</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label for="passlogin" class="col-sm-2 control-label">新密码</label>
+              <div class="col-sm-10">
+                <input type="password" class="form-control" id="newpass1" placeholder="请输入密码">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="passlogin" class="col-sm-2 control-label">确认密码</label>
+              <div class="col-sm-10">
+                <input type="password" class="form-control" id="newpass2" placeholder="请再次输入密码">
+              </div>
+            </div>
+          </form>
+          <p id="resp" class="text-danger resp"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+          <button type="button" class="btn btn-primary changepass">确定</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="js/index.js"></script>
+</body>
+
+</html>
+<!-- git@github.com:andysoo/jjblog.git -->
+<!-- browser-sync start --proxy "127.0.0.1" --files "**/*.*" -->
