@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once 'config.php';
 if (!isset($_REQUEST['cmd'])) {
     exit;
 } elseif ($_REQUEST['cmd'] == 'logout') {

@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once 'config.php';
 $res = [
     'changepass' => false,
     'info'       => [
@@ -8,12 +8,10 @@ $res = [
         'name' => '',
     ],
 ];
-$salt = 'JJ2018';
 if (isset($_REQUEST['newpass'], $_SESSION['USER'])) {
     $newPass  = $_REQUEST['newpass'];
     $newPass  = md5(md5($newPass) . $salt);
     $user     = $_SESSION['USER'];
-    $pdo      = new PDO('mysql:host=127.0.0.1;dbname=jjblog', 'root', 'root');
     $sql      = "UPDATE `users` SET `pass`='{$newPass}' WHERE `user`='{$user}'";
     $affected = $pdo->exec($sql);
     if ($affected) {

@@ -14,7 +14,6 @@ function signIn(data) {
       $('#resp').html(res.txt);
     } else {
       lsSave(res.info);
-      $('.guest').hide();
       $('.user').fadeIn();
       $('.login').hide();
       $('.username').html(res.info.name).fadeIn();
@@ -34,7 +33,6 @@ function checkLogin() {
   $.get('php/stat.php', { cmd: 'checkLogin' }, function (res) {
     // console.log(res);
     if (res.login) {
-      $('.guest').hide();
       $('.user').fadeIn();
       $('.login').hide();
       $('.username').html(res.name).fadeIn();
@@ -50,6 +48,12 @@ $(function () {
   $('.username').hide();
   checkLogin();
   setInterval(checkLogin, 1000 * 60 * 15);
+
+  // post帖子列表
+  $.post("php/list.php", { cmd: 'list' }, function (result) {
+    $('#accordion').html(result);
+  });
+
   $('.login').on('click', function () {
     $.get('php/captcha.php', {}, function (res) {
       $('#captcha').html(res);
@@ -124,7 +128,6 @@ $(function () {
       $.get('php/logout.php', { cmd: "logout" }, function (res) {
         if (res.logout) {
           $('.user').hide();
-          $('.guest').fadeIn();
           $('.username').hide();
           $('.logout').hide();
           $('.login').fadeIn();
@@ -156,6 +159,7 @@ $(function () {
     var p2 = $('#newpass2').val();
     console.log(p1, p2);
     if (p1 == p2) {
+      $('.resp').html('');
       $.get('php/changepass.php', { newpass: p1 }, function (res) {
         console.log(res);
         if (res.changepass) {

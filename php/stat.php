@@ -8,5 +8,3 @@ if (isset($_SESSION['USER'], $_SESSION['NAME']) && $_SESSION['USER'] != '') {
 } else {
     echo '{"login":false}';
 }
-
-// echo md5(md5(123456) . 'JJ2018');

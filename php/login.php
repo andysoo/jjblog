@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once 'config.php';
 $res = [
     'err'  => true,
     'txt'  => '表单参数错误！',
@@ -8,7 +8,6 @@ $res = [
         'pass' => '',
     ],
 ];
-$salt = 'JJ2018';
 if (isset($_REQUEST['user'], $_REQUEST['pass'])) {
     if (isset($_REQUEST['cmd'], $_REQUEST['code'], $_SESSION['code']) && $_REQUEST['cmd'] == 'login' && $_REQUEST['code'] != '') {
         if ($_REQUEST['code'] != $_SESSION['code']) {
@@ -21,7 +20,6 @@ if (isset($_REQUEST['user'], $_REQUEST['pass'])) {
     if (strlen($pass) != 32) {
         $pass = md5(md5($pass) . $salt);
     }
-    $pdo  = new PDO('mysql:host=127.0.0.1;dbname=jjblog', 'root', 'root');
     $sql  = "SELECT `name` FROM `users` WHERE user='{$user}' AND pass='{$pass}'";
     $req  = $pdo->query($sql);
     $data = $req->fetch(PDO::FETCH_ASSOC);

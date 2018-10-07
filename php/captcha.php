@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once 'config.php';
 $a                = rand(10, 99);
 $b                = rand(10, 99);
 $c                = $a + $b;

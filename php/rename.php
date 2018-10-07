@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once 'config.php';
 $res = [
     'rename' => false,
     'info'   => [
@@ -11,7 +11,6 @@ $res = [
 if (isset($_REQUEST['newName'], $_SESSION['NAME'])) {
     $newName  = $_REQUEST['newName'];
     $oldName  = $_SESSION['NAME'];
-    $pdo      = new PDO('mysql:host=127.0.0.1;dbname=jjblog', 'root', 'root');
     $sql      = "UPDATE `users` SET `name`='{$newName}' WHERE `name`='{$oldName}'";
     $affected = $pdo->exec($sql);
     if ($affected) {
