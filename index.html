@@ -60,52 +60,39 @@
   </nav>
 
   <main class="container" role="main">
-    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-      <!-- <div class="panel panel-default">
-        <div class="panel-heading" role="tab" id="heading1">
-          <h4 class="panel-title">
-            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="true"
-              aria-controls="collapse1">
-              Collapsible Group Item #1
-            </a>
-          </h4>
-        </div>
-        <div id="collapse1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading1">
-          <div class="panel-body">
-            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon
-            officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3
-            wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
-            Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan
-            excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt
-            you probably haven't heard of them accusamus labore sustainable VHS.
-          </div>
-        </div>
+    <div class="starter-template">
+      <div class="list-group" id="forum-list">
       </div>
-      <div class="panel panel-default">
-        <div class="panel-heading" role="tab" id="heading2">
-          <h4 class="panel-title">
-            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="true"
-              aria-controls="collapse2">
-              Collapsible Group Item #1
-            </a>
-          </h4>
-        </div>
-        <div id="collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading2">
-          <div class="panel-body">
-            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon
-            officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3
-            wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
-            Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan
-            excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt
-            you probably haven't heard of them accusamus labore sustainable VHS.
-          </div>
-        </div>
-      </div> -->
+      <div class="guest">
+        <h1>My Blog</h1>
+        <p class="lead">游客</p>
+      </div>
       <div class="user">
-        <h2>我的论坛</h2>
-        <p class="lead">授权用户</p>
+        <h1>My Blog</h1>
+        <p class="lead">授权用户。</p>
       </div>
     </div>
+    <div class="forum-template">
+      <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">帖子标题</div>
+        <div class="panel-body">
+          <span id="forumname">发帖用户昵称</span>
+          <span id="time">发帖时间</span>
+          <p id="forum-content">帖子内容</p>
+        </div>
+
+        <!-- List group -->
+        <ul class="list-group">
+          <!-- <li class="list-group-item">
+            <div class="panel-body">
+              <div>回帖用户昵称</div>
+              <div>回帖时间</div>
+              <p>回帖内容</p>
+            </div>
+          </li> -->
+        </ul>
+      </div>
   </main>
   <!-- 登陆框 -->
   <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

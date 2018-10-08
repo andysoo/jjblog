@@ -1,24 +1,34 @@
 <?php
 require_once 'config.php';
 if (isset($_REQUEST['cmd']) && $_REQUEST['cmd'] == 'list') {
-    $sql  = "SELECT `parent_id`,`title`,`content` FROM `posts` LIMIT 0,10";
+    $sql  = "SELECT `parent_id`,`title`,`readed` FROM `posts` LIMIT 0,10";
     $req  = $pdo->query($sql);
     $data = $req->fetchALL(PDO::FETCH_ASSOC);
     foreach ($data as $row) {
-        echo '<div class="panel panel-default"><div class="panel-heading" role="tab" id="heading';
+        echo '<a href="#" class="list-group-item"><span style="display:none" id="parent_id">';
         echo $row['parent_id'];
-        echo '"><h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse';
-        echo $row['parent_id'];
-        echo '" aria-expanded="true" aria-controls="collapse';
-        echo $row['parent_id'];
-        echo '">';
+        echo '</span>';
         echo $row['title'];
-        echo '</a></h4></div><div id="collapse';
-        echo $row['parent_id'];
-        echo '" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading';
-        echo $row['parent_id'];
-        echo '"><div class="panel-body">';
-        echo $row['content'];
-        echo '</div></div></div>';
+        echo '<span class="badge"><span class="glyphicon glyphicon-eye-open"></span> ';
+        echo $row['readed'];
+        echo '</span></a>';
+    }
+}
+
+if (isset($_REQUEST['parent_id'])) {
+    $id   = $_REQUEST['parent_id'];
+    $sql  = "SELECT `readed` FROM `posts` WHERE `parent_id`='{$id}'";
+    $req  = $pdo->query($sql);
+    $data = $req->fetch(PDO::FETCH_ASSOC);
+    if ($data) {
+        $readed   = $data['readed'] + 1;
+        $sql      = "UPDATE `posts` SET `readed`='{$readed}' WHERE `parent_id`='{$id}'";
+        $affected = $pdo->exec($sql);
+        if ($affected) {
+            $sql  = "SELECT * FROM `posts` WHERE `parent_id`='{$id}'";
+            $req  = $pdo->query($sql);
+            $data = $req->fetch(PDO::FETCH_ASSOC);
+            echo json_encode($data);
+        }
     }
 }

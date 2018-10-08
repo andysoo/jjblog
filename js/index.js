@@ -16,6 +16,7 @@ function signIn(data) {
       lsSave(res.info);
       $('.user').fadeIn();
       $('.login').hide();
+      $('.guest').hide();
       $('.username').html(res.info.name).fadeIn();
       $('.logout').fadeIn();
       $('#login').modal('hide');
@@ -35,6 +36,7 @@ function checkLogin() {
     if (res.login) {
       $('.user').fadeIn();
       $('.login').hide();
+      $('.guest').hide();
       $('.username').html(res.name).fadeIn();
       $('.logout').fadeIn();
     } else {
@@ -46,12 +48,14 @@ $(function () {
   $('.user').hide();
   $('.logout').hide();
   $('.username').hide();
+  $('.forum-template').hide();
   checkLogin();
   setInterval(checkLogin, 1000 * 60 * 15);
 
   // post帖子列表
   $.post("php/list.php", { cmd: 'list' }, function (result) {
-    $('#accordion').html(result);
+    // console.log(result);
+    $('#forum-list').html(result);
   });
 
   $('.login').on('click', function () {
@@ -130,6 +134,7 @@ $(function () {
           $('.user').hide();
           $('.username').hide();
           $('.logout').hide();
+          $('.guest').fadeIn();
           $('.login').fadeIn();
           localStorage['__INFO__'] = '';
         }
@@ -173,6 +178,24 @@ $(function () {
       $('.resp').html('两次密码不相同');
     }
   });
+
+  // 点击列表
+  $('#forum-list').on('click', function (e) {
+    var id = e.target.children[0].innerHTML;
+    $('.starter-template').hide();
+    $('.forum-template').fadeIn();
+    $.post('php/list.php', { parent_id: id }, function (result) {
+      // console.log(result);
+      $('.panel-heading').html(result.title);
+      $('#forumname').html(result.user_id);
+      $('#time').html(result.post_date);
+      $('#forum-content').html(result.content);
+    }, 'json');
+    $.post('php/replie.php', { parent_id: id }, function (result) {
+      console.log(result);
+      $('.list-group').html(result);
+    });
+  })
 });
 
 
