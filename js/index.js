@@ -14,9 +14,7 @@ function signIn(data) {
       $('#resp').html(res.txt);
     } else {
       lsSave(res.info);
-      $('.user').fadeIn();
       $('.login').hide();
-      $('.guest').hide();
       $('.username').html(res.info.name).fadeIn();
       $('.logout').fadeIn();
       $('#login').modal('hide');
@@ -34,9 +32,7 @@ function checkLogin() {
   $.get('php/stat.php', { cmd: 'checkLogin' }, function (res) {
     // console.log(res);
     if (res.login) {
-      $('.user').fadeIn();
       $('.login').hide();
-      $('.guest').hide();
       $('.username').html(res.name).fadeIn();
       $('.logout').fadeIn();
     } else {
@@ -45,7 +41,6 @@ function checkLogin() {
   }, 'json');
 }
 $(function () {
-  $('.user').hide();
   $('.logout').hide();
   $('.username').hide();
   $('.forum-template').hide();
@@ -54,7 +49,6 @@ $(function () {
 
   // post帖子列表
   $.post("php/list.php", { cmd: 'list' }, function (result) {
-    // console.log(result);
     $('#forum-list').html(result);
   });
 
@@ -78,7 +72,7 @@ $(function () {
       return;
     }
     if (c.length < 1) {
-      $('#code').focus().select();
+      $('#code').focus();
       return;
     }
     signIn({ cmd: 'login', user: u, pass: k, code: c });
@@ -98,14 +92,14 @@ $(function () {
       return;
     }
     var p1 = $('#passreg1').val();
-    if (p1.length < 5) {
+    if (p1.length < 4) {
       $('#passreg').focus().select();
       return;
     }
     var p2 = $('#passreg2').val();
     var n = $('#name').val();
     if (n.length < 1) {
-      $('#name').focus().select();
+      $('#name').focus();
       return;
     }
     console.log(u);
@@ -131,10 +125,8 @@ $(function () {
     if (confirm('确定注销吗?')) {
       $.get('php/logout.php', { cmd: "logout" }, function (res) {
         if (res.logout) {
-          $('.user').hide();
           $('.username').hide();
           $('.logout').hide();
-          $('.guest').fadeIn();
           $('.login').fadeIn();
           localStorage['__INFO__'] = '';
         }
@@ -161,7 +153,15 @@ $(function () {
   // 改密码
   $('.changepass').on('click', function () {
     var p1 = $('#newpass1').val();
+    if (p1.length < 4) {
+      $('#newpass1').focus().select();
+      return;
+    }
     var p2 = $('#newpass2').val();
+    if (p2.length < 4) {
+      $('#newpass1').focus().select();
+      return;
+    }
     console.log(p1, p2);
     if (p1 == p2) {
       $('.resp').html('');
@@ -184,16 +184,70 @@ $(function () {
     var id = e.target.children[0].innerHTML;
     $('.starter-template').hide();
     $('.forum-template').fadeIn();
-    $.post('php/list.php', { parent_id: id }, function (result) {
+    $.post('php/detail.php', { parent_id: id }, function (result) {
       // console.log(result);
-      $('.panel-heading').html(result.title);
+      $('#title').html(result.title);
+      $('#parent-id').text(result.parent_id);
       $('#forumname').html(result.user_id);
       $('#time').html(result.post_date);
       $('#forum-content').html(result.content);
     }, 'json');
-    $.post('php/replie.php', { parent_id: id }, function (result) {
-      console.log(result);
+    $.post('php/reply.php', { cmd: 'replies', parent_id: id }, function (result) {
+      // console.log(result);
       $('.list-group').html(result);
+    });
+  })
+
+  // 发贴
+  $('#newpost').on('click', function () {
+    var t = $('#text-title').val();
+    if (t.length < 1) {
+      $('#text-title').focus();
+      return;
+    }
+    var c = $('textarea').val();
+    if (c.length < 1) {
+      $('textarea').focus();
+      return;
+    }
+    $.post('php/post.php', { cmd: 'post', title: t, content: c }, function (result) {
+      if (result.login) {
+        $.post("php/list.php", { cmd: 'list' }, function (res) {
+          if (result.add) {
+            $('#forum-list').html(res);
+          } else {
+            new Error('加入数据库失败')
+          }
+        });
+      } else {
+        $('#login').modal('show');
+        $('#resp').html('不是论坛会员，请登录');
+      }
+    }, 'json');
+  })
+
+  $('.btn-xs').on('click', function () {
+    $('.resp').html('');
+    $('.reply').html('');
+  })
+
+  //回贴
+  $('#replies').on('click', function () {
+    var c = $('.reply').val();
+    var id = $('#parent-id').html();
+    // console.log(id);
+    if (c.length < 1) {
+      $('.reply').focus();
+      return;
+    }
+    $.post('php/reply.php', { cmd: 'reply', content: c, parent_id: id }, function (res) {
+      // console.log(res)
+      if (res.length < 10) {
+        $('.resp').html(res);
+      } else {
+        $('.resp').html('回复成功');
+        $('.list-group').html(res);
+      }
     });
   })
 });

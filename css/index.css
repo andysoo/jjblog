@@ -4,7 +4,8 @@ body{
 .navbar-default{
   background: #eff;
 }
-.navbar-brand{
-  font-size: 40px;
+.navbar-brand h1{
+  color: blueviolet;
   font-weight: bold;
+  margin-top: -10px;
 }

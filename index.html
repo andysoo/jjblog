@@ -16,12 +16,14 @@
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
           aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
+          <span class="sr-only"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">JJ Blog</a>
+        <a class="navbar-brand" href="/">
+          <h1>JJ Blog</h1>
+        </a>
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
@@ -55,42 +57,46 @@
           </li>
         </ul>
       </div>
-      <!--/.nav-collapse -->
     </div>
   </nav>
 
   <main class="container" role="main">
     <div class="starter-template">
+      <h2>最新发贴</h2>
       <div class="list-group" id="forum-list">
       </div>
-      <div class="guest">
-        <h1>My Blog</h1>
-        <p class="lead">游客</p>
-      </div>
-      <div class="user">
-        <h1>My Blog</h1>
-        <p class="lead">授权用户。</p>
+      <div>
+        <h2>快速发贴</h2>
+        <form>
+          <div class="form-group">
+            <label for="text-title">标题</label>
+            <input type="text" class="form-control" id="text-title">
+            <label for="text-title">内容</label>
+            <textarea class="form-control" rows="5"></textarea>
+          </div>
+          <button style="float:right" type="button" class="btn btn-primary" id="newpost">发贴</button>
+        </form>
       </div>
     </div>
+
+
     <div class="forum-template">
+      <h2>帖子详情</h2>
       <div class="panel panel-default">
-        <!-- Default panel contents -->
-        <div class="panel-heading">帖子标题</div>
+        <!-- 帖子详情 -->
+        <div class="panel-heading">
+          <span id="parent-id" style="display:none"></span>
+          <span id="title">帖子标题</span>
+          <button type="button" class="btn btn-primary btn-xs" style="float:right" data-toggle="modal" data-target="#reply">回复</button>
+        </div>
         <div class="panel-body">
           <span id="forumname">发帖用户昵称</span>
           <span id="time">发帖时间</span>
           <p id="forum-content">帖子内容</p>
         </div>
 
-        <!-- List group -->
+        <!-- 回贴列表 -->
         <ul class="list-group">
-          <!-- <li class="list-group-item">
-            <div class="panel-body">
-              <div>回帖用户昵称</div>
-              <div>回帖时间</div>
-              <p>回帖内容</p>
-            </div>
-          </li> -->
         </ul>
       </div>
   </main>
@@ -231,6 +237,25 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
           <button type="button" class="btn btn-primary changepass">确定</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 回帖框 -->
+  <div class="modal fade" id="reply" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">快速回复</h4>
+        </div>
+        <div class="modal-body">
+          <textarea class="form-control reply" rows="5"></textarea>
+          <p class="text-danger resp"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+          <button type="button" class="btn btn-primary" id="replies">回复</button>
         </div>
       </div>
     </div>

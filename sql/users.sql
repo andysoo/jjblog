@@ -1,3 +1,11 @@
+show databases;
+drop database if exists jjblog;
+
+show databases;
+create database jjblog;
+show databases;
+
+
 use jjblog;
 drop table if exists `users`;
 create table if not exists `users`(
