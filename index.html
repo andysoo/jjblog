@@ -42,6 +42,7 @@
             <ul class="dropdown-menu" aria-labelledby="drop3">
               <li><a class="nav-link " href="#" data-toggle="modal" data-target="#rename">修改昵称</a></li>
               <li><a class="nav-link " href="#" data-toggle="modal" data-target="#changepass">修改密码</a></li>
+              <li><a class="nav-link " href="#" data-toggle="modal" data-target="#myposts">管理帖子</a></li>
             </ul>
           </li>
 
@@ -79,7 +80,6 @@
       </div>
     </div>
 
-
     <div class="forum-template">
       <h2>帖子详情</h2>
       <div class="panel panel-default">
@@ -96,9 +96,10 @@
         </div>
 
         <!-- 回贴列表 -->
-        <ul class="list-group">
+        <ul class="list-group" id="reply-list">
         </ul>
       </div>
+    </div>
   </main>
   <!-- 登陆框 -->
   <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -256,6 +257,21 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
           <button type="button" class="btn btn-primary" id="replies">回复</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 帖子管理 -->
+  <div class="modal fade" id="myposts" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">我的帖子</h4>
+        </div>
+        <div class="modal-body">
+          <div class="list-group" id="myforum-list">
+          </div>
         </div>
       </div>
     </div>

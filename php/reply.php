@@ -10,11 +10,12 @@ if (isset($_REQUEST['cmd'], $_REQUEST['parent_id']) && $_REQUEST['cmd'] == 'repl
         echo $row['user_id'];
         echo '</span> <span>';
         echo $row['post_date'];
-        echo '</span><span style="display:none">';
-        echo $row['id'];
-        echo '</span><p>';
+        echo '</span>';
+        echo '<p>';
         echo $row['content'];
-        echo '</p></div></li>';
+        echo '</p><span style="display:none">';
+        echo $row['id'];
+        echo '</span><button class="btn btn-danger btn-xs" style="float:right">删除回帖</button></div></li>';
     }
 }
 if (isset($_REQUEST['cmd'], $_REQUEST['parent_id']) && $_REQUEST['cmd'] == 'reply') {
@@ -36,11 +37,12 @@ if (isset($_REQUEST['cmd'], $_REQUEST['parent_id']) && $_REQUEST['cmd'] == 'repl
                 echo $row['user_id'];
                 echo '</span> <span>';
                 echo $row['post_date'];
-                echo '</span><span style="display:none" id="rtid">';
-                echo $row['id'];
-                echo '</span><p>';
+                echo '</span>';
+                echo '<p>';
                 echo $row['content'];
-                echo '</p></div></li>';
+                echo '</p><span style="display:none">';
+                echo $row['id'];
+                echo '</span><button class="btn btn-danger btn-xs" style="float:right">删除回帖</button></div></li>';
             }
         }
     }

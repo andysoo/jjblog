@@ -49,6 +49,7 @@ $(function () {
 
   // post帖子列表
   $.post("php/list.php", { cmd: 'list' }, function (result) {
+    // console.log(result);
     $('#forum-list').html(result);
   });
 
@@ -231,7 +232,7 @@ $(function () {
     $('.reply').html('');
   })
 
-  //回贴
+  // 回贴
   $('#replies').on('click', function () {
     var c = $('.reply').val();
     var id = $('#parent-id').html();
@@ -249,6 +250,42 @@ $(function () {
         $('.list-group').html(res);
       }
     });
+  })
+
+  // 管理帖子
+  $('#myposts').on('show.bs.modal', function () {
+    $.post("php/list.php", { cmd: 'mylist' }, function (result) {
+      // console.log(result);
+      $('#myforum-list').html(result);
+    });
+  })
+
+  $('#myforum-list').on('click', function (e) {
+    if (confirm('确定删除此贴吗?注意删除后将不能恢复！')) {
+      var id = e.target.children[0].innerHTML;
+      console.log(id);
+      $.post('php/delete.php', { cmd: 'delete', parent_id: id }, function (result) {
+        $('#myforum-list').html(result);
+      });
+    }
+  })
+
+  // 删除回贴
+  $('#reply-list').on('click', function (e) {
+    try {
+      var rid = e.target.previousElementSibling.innerHTML;
+      var u = e.currentTarget.previousElementSibling.children[0].innerHTML;
+      var tid = e.currentTarget.previousElementSibling.previousElementSibling.children[0].innerHTML;
+      if (Number(rid) && Number(tid)) {
+        console.log(rid);
+        console.log(tid);
+        if (confirm('确定删除些回复吗?')) {
+          $.post('php/delreply.php', { tid: tid, rid: rid, user: u, cmd: 'delreply' }, function (result) {
+            $('.list-group').html(result);
+          });
+        }
+      }
+    } catch (error) { }
   })
 });
 
